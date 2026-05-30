@@ -23,6 +23,7 @@ print(f"\nColunas e tipos de dados:")
 print(df.dtypes)
 print(f"\nPrimeiras 5 linhas:")
 print(df.head())    
+
 # -----------------------------------------------
 # SPRINT 2 - VERIFICAÇÃO DE PROBLEMAS NA BASE
 # -----------------------------------------------
@@ -145,3 +146,40 @@ mapa_ec = {1: 'Casado/União', 2: 'Divorciado', 3: 'Separado', 4: 'Solteiro', 5:
 compras_ec['Estado Civil'] = compras_ec['Estado Civil'].map(mapa_ec)
 print("\n--- Agrupamento 4 com descrição: ---")
 print(compras_ec.to_string(index=False))
+# -----------------------------------------------
+# SPRINT 6 - CONCLUSÕES E INSIGHTS
+# -----------------------------------------------
+
+print("\n" + "=" * 50)
+print("SPRINT 6 - CONCLUSÕES E INSIGHTS")
+print("=" * 50)
+
+print("""
+1. QUALIDADE DOS DADOS
+   A base continha 96.553 registros duplicados (11,6% do total),
+   removidos para garantir a integridade da análise.
+
+2. PERFIL DE COMPRAS POR GÊNERO
+   Clientes do sexo feminino realizaram mais compras (382.427)
+   do que masculino (351.020), diferença de ~8%.
+
+3. CATEGORIA MAIS VENDIDA
+   Alimentos lidera com 384.197 compras, representando mais
+   de 52% do total. Existe também a categoria #N/D (3.228
+   registros) que indica inconsistência nos dados de produto.
+
+4. EVOLUÇÃO TEMPORAL
+   As vendas cresceram de 2019 a 2021, com pico em 2021
+   (216.813 compras). Em 2022 houve queda para 147.727,
+   possivelmente por ser um ano incompleto na base.
+
+5. PERFIL FAMILIAR DOS CLIENTES
+   A maioria dos clientes não tem filhos (moda = 0), mas
+   a média de 1,15 indica que parte significativa tem filhos.
+   75% dos clientes têm até 2 filhos.
+
+6. PROBLEMAS REMANESCENTES
+   - Coluna #N/D em PR_CAT indica produtos sem categoria definida.
+   - Ano de 2022 pode estar incompleto (dados até dezembro/2022).
+   - Não há coluna de valor de venda, limitando análise financeira.
+""")
