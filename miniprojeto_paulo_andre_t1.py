@@ -105,3 +105,43 @@ print(f"  Mínimo   : {df['CL_FHL'].min()}")
 print(f"  Máximo   : {df['CL_FHL'].max()}")
 print(f"\nQuartis:")
 print(df['CL_FHL'].quantile([0.25, 0.50, 0.75]).to_string())
+# -----------------------------------------------
+# SPRINT 5 - PADRÕES DE AGRUPAMENTO
+# -----------------------------------------------
+
+print("\n" + "=" * 50)
+print("SPRINT 5 - PADRÕES DE AGRUPAMENTO")
+print("=" * 50)
+
+# Agrupamento 1: Compras por Gênero
+print("\n--- Agrupamento 1: Total de compras por Gênero ---")
+compras_genero = df.groupby('CL_GENERO')['CO_ID'].count().reset_index()
+compras_genero.columns = ['Gênero', 'Total de Compras']
+compras_genero = compras_genero.sort_values('Total de Compras', ascending=False)
+print(compras_genero.to_string(index=False))
+
+# Agrupamento 2: Compras por Categoria de Produto
+print("\n--- Agrupamento 2: Total de compras por Categoria ---")
+compras_categoria = df.groupby('PR_CAT')['CO_ID'].count().reset_index()
+compras_categoria.columns = ['Categoria', 'Total de Compras']
+compras_categoria = compras_categoria.sort_values('Total de Compras', ascending=False)
+print(compras_categoria.to_string(index=False))
+
+# Agrupamento 3: Compras por Ano
+print("\n--- Agrupamento 3: Total de compras por Ano ---")
+df['ANO'] = df['DATA'].dt.year
+compras_ano = df.groupby('ANO')['CO_ID'].count().reset_index()
+compras_ano.columns = ['Ano', 'Total de Compras']
+print(compras_ano.to_string(index=False))
+
+# Agrupamento 4: Compras por Estado Civil
+print("\n--- Agrupamento 4: Total de compras por Estado Civil ---")
+compras_ec = df.groupby('CL_EC')['CO_ID'].count().reset_index()
+compras_ec.columns = ['Estado Civil', 'Total de Compras']
+compras_ec = compras_ec.sort_values('Total de Compras', ascending=False)
+print(compras_ec.to_string(index=False))
+# Dicionário de estado civil (fonte: documentação da base)
+mapa_ec = {1: 'Casado/União', 2: 'Divorciado', 3: 'Separado', 4: 'Solteiro', 5: 'Viúvo'}
+compras_ec['Estado Civil'] = compras_ec['Estado Civil'].map(mapa_ec)
+print("\n--- Agrupamento 4 com descrição: ---")
+print(compras_ec.to_string(index=False))
