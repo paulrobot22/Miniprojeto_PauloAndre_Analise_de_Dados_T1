@@ -86,3 +86,22 @@ print(f"\nCategorias vazias preenchidas com 'Sem Categoria'.")
 # 4. Exibe tipos de dados após limpeza
 print(f"\nTipos de dados após limpeza:")
 print(df.dtypes)
+# -----------------------------------------------
+# SPRINT 4 - ESTATÍSTICAS DESCRITIVAS
+# -----------------------------------------------
+
+print("\n" + "=" * 50)
+print("SPRINT 4 - ESTATÍSTICAS DESCRITIVAS")
+print("=" * 50)
+
+# Coluna analisada: CL_FHL = Número de filhos do cliente
+print("\nEstatísticas da coluna 'CL_FHL' (Número de filhos):")
+print(f"  Contagem : {df['CL_FHL'].count()}")
+print(f"  Média    : {df['CL_FHL'].mean():.2f}")
+print(f"  Mediana  : {df['CL_FHL'].median():.2f}")
+print(f"  Moda     : {df['CL_FHL'].mode()[0]}")
+print(f"  Desvio P.: {df['CL_FHL'].std():.2f}")
+print(f"  Mínimo   : {df['CL_FHL'].min()}")
+print(f"  Máximo   : {df['CL_FHL'].max()}")
+print(f"\nQuartis:")
+print(df['CL_FHL'].quantile([0.25, 0.50, 0.75]).to_string())
