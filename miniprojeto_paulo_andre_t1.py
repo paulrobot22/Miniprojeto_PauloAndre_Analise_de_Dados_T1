@@ -53,3 +53,36 @@ for col in colunas_texto:
 # Verifica datas com formato inválido
 print("\nAmostra de valores da coluna DATA:")
 print(df['DATA'].value_counts().head())
+# -----------------------------------------------
+# SPRINT 3 - LIMPEZA DOS DADOS
+# -----------------------------------------------
+
+print("\n" + "=" * 50)
+print("SPRINT 3 - LIMPEZA DOS DADOS")
+print("=" * 50)
+
+# 1. Removendo duplicatas
+registros_antes = df.shape[0]
+df = df.drop_duplicates()
+registros_depois = df.shape[0]
+print(f"\nDuplicatas removidas: {registros_antes - registros_depois}")
+print(f"Registros restantes: {registros_depois}")
+
+# 2. Convertendo DATA para datetime
+# Justificativa: necessário para análises temporais e ordenação por data
+df['DATA'] = pd.to_datetime(df['DATA'], format='%d/%m/%Y')
+print(f"\nColuna DATA convertida para datetime.")
+print(f"Tipo atual: {df['DATA'].dtype}")
+print(f"Data mínima: {df['DATA'].min()}")
+print(f"Data máxima: {df['DATA'].max()}")
+
+# 3. Preenchendo categorias vazias com 'Sem Categoria'
+# Justificativa: manter registros sem perder informações das outras colunas
+for col in ['PR_CAT', 'CL_SEG', 'CL_GENERO', 'PR_NOME']:
+    df[col] = df[col].apply(lambda x: 'Sem Categoria' if str(x).strip() == '' else x)
+
+print(f"\nCategorias vazias preenchidas com 'Sem Categoria'.")
+
+# 4. Exibe tipos de dados após limpeza
+print(f"\nTipos de dados após limpeza:")
+print(df.dtypes)
